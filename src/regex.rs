@@ -3,6 +3,22 @@ use regex::Regex;
 
 use crate::components::{directional::{DIRECTIONAL, DIRECTIONAL_ABBVR}, street_type::{STREET_TYPE, STREET_TYPE_ABBVR}, unit::{UNIT, UNIT_ABBVR}};
 
+#[macro_export]
+macro_rules! regex_map_string {
+    ($haystack:ident, $phrase:ident) => {{
+        if let Some(val) = regex_map($haystack, &$phrase) { 
+            val
+        } else { "".to_owned() }
+    }};
+}
+
+pub fn regex_map(haystack: &str, phrase: &Lazy<Regex>) -> Option<String> {
+    if let Some(needle) = phrase.captures(&haystack) {
+        let val = needle.get(0).map_or("", |m|m.as_str());
+        return Some(val.trim().replace("\"", ""))
+    } else { None }
+}
+
 pub static REG_STREET_ABBVR0: Lazy<Regex> = Lazy::new(||{
     let size = STREET_TYPE_ABBVR.len() / 4;
     let modified = STREET_TYPE_ABBVR[..size].iter().map(|street| {
