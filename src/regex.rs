@@ -3,15 +3,6 @@ use regex::Regex;
 
 use crate::components::{directional::{DIRECTIONAL, DIRECTIONAL_ABBVR}, street_type::{STREET_TYPE, STREET_TYPE_ABBVR}, unit::{UNIT, UNIT_ABBVR}};
 
-#[macro_export]
-macro_rules! regex_map_string {
-    ($haystack:ident, $phrase:ident) => {{
-        if let Some(val) = regex_map($haystack, &$phrase) { 
-            val
-        } else { "".to_owned() }
-    }};
-}
-
 pub fn regex_map(haystack: &str, phrase: &Lazy<Regex>) -> Option<String> {
     if let Some(needle) = phrase.captures(&haystack) {
         let val = needle.get(0).map_or("", |m|m.as_str());

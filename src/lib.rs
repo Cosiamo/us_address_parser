@@ -1,17 +1,16 @@
-use components::{Direction, StreetType, Unit};
-
 pub mod components;
 pub mod regex;
 pub mod parse;
 
-#[derive(Debug)]
+#[derive(Debug, Clone)]
+/// `Address` is the return type for [`AddressParsing::parse_addr`].
 pub struct Address {
-    pub street_no: String,
-    pub direction: Direction,
-    pub street_name: String,
-    pub street_type: StreetType,
-    pub unit_no: String,
-    pub unit_type: Unit,
+    pub street_no: Option<String>,
+    pub direction: Option<String>,
+    pub street_name: Option<String>,
+    pub street_type: Option<String>,
+    pub unit_no: Option<String>,
+    pub unit_type: Option<String>,
 }
 
 pub trait AddressParsing {
@@ -32,12 +31,12 @@ impl AddressParsing for &str {
 
 pub fn string_to_address(full_address: String) -> Address {
     let address: Address = Address { 
-        street_no: "".to_string(), 
-        direction: Direction::Abbreviated("".to_string()), 
-        street_name: "".to_string(), 
-        street_type: StreetType::Abbreviated("".to_string()), 
-        unit_no: "".to_string(), 
-        unit_type: Unit::Abbreviated("".to_string())
+        street_no: None, 
+        direction: None, 
+        street_name: None, 
+        street_type: None, 
+        unit_no: None, 
+        unit_type: None
     };
 
     address

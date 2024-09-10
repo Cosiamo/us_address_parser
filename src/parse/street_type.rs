@@ -1,17 +1,4 @@
-use crate::{components::StreetType, regex::{regex_map, REG_STREET0, REG_STREET1, REG_STREET2, REG_STREET3, REG_STREET_ABBVR0, REG_STREET_ABBVR1, REG_STREET_ABBVR2, REG_STREET_ABBVR3}, Address};
-
-macro_rules! get_street_type {
-    ($captured:ident, $address:ident, $full_address:ident, $street_type:ident) => {{
-        if $captured.len() == 1 {
-            $address.street_type = StreetType::$street_type($captured[0].clone());
-            return $address
-        } else if $captured.len() > 0 {
-            let index = find_last_in_haystack(&$captured, $full_address);
-            $address.street_type = StreetType::$street_type($captured[index].clone());
-            return $address
-        }
-    }};
-}
+use crate::{regex::{regex_map, REG_STREET0, REG_STREET1, REG_STREET2, REG_STREET3, REG_STREET_ABBVR0, REG_STREET_ABBVR1, REG_STREET_ABBVR2, REG_STREET_ABBVR3}, Address};
 
 pub fn parse_street_type(mut address: Address, full_address: &str) -> Address {
     let mut captured: Vec<String> = vec![];
@@ -20,18 +7,26 @@ pub fn parse_street_type(mut address: Address, full_address: &str) -> Address {
     if let Some(val) = regex_map(&full_address, &REG_STREET_ABBVR1) { captured.push(val) };
     if let Some(val) = regex_map(&full_address, &REG_STREET_ABBVR2) { captured.push(val) };
     if let Some(val) = regex_map(&full_address, &REG_STREET_ABBVR3) { captured.push(val) };
-
-    get_street_type!(captured, address, full_address, Abbreviated);
     
     if let Some(val) = regex_map(&full_address, &REG_STREET0) { captured.push(val) };
     if let Some(val) = regex_map(&full_address, &REG_STREET1) { captured.push(val) };
     if let Some(val) = regex_map(&full_address, &REG_STREET2) { captured.push(val) };
     if let Some(val) = regex_map(&full_address, &REG_STREET3) { captured.push(val) };
 
-    get_street_type!(captured, address, full_address, Full);
-    
-    address.street_type = StreetType::Abbreviated("".to_owned());
-    return address
+    if captured.len() == 1 {
+        address.street_type = Some(captured[0].clone());
+        return address
+    } else if captured.len() > 0 {
+        // If an address is "123 Maple Parks Street" (both street types), 
+        // it will only return "Street".
+        // Can't use `captured[captured.len() - 1]` because of how the Regex is split up
+        let index = find_last_in_haystack(&captured, full_address);
+        address.street_type = Some(captured[index].clone());
+        return address
+    } else {
+        address.street_type = None;
+        return address
+    }
 }
 
 fn find_last_in_haystack(captured: &Vec<String>, full_address: &str) -> usize {
