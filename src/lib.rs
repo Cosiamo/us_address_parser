@@ -20,17 +20,18 @@ pub trait AddressParsing {
 
 impl AddressParsing for String {
     fn parse_addr(&self) -> Address {
-        string_to_address(self.to_string())
+        string_to_address(self)
     }
 }
 
 impl AddressParsing for &str {
     fn parse_addr(&self) -> Address {
-        string_to_address(self.to_string())
+        string_to_address(&self.to_string())
     }
 }
 
-pub fn string_to_address(full_address: String) -> Address {
+/// Used to convert `String` to `[us_address_parser::Address]`
+pub fn string_to_address(full_address: &String) -> Address {
     let full_address = full_address.trim().to_ascii_uppercase();
     let address: Address = Address { 
         street_no: None, 
