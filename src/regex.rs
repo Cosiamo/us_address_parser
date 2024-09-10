@@ -61,7 +61,7 @@ pub static REG_STREET_NUMBER: Lazy<Regex> = Lazy::new(|| {
 });
 
 pub static REG_UNIT_NO: Lazy<Regex> = Lazy::new(|| {
-    Regex::new(r"[ ]+\d+\.?").unwrap()
+    Regex::new(r"[ ]+\d+\.?$").unwrap()
 });
 
 pub static REG_UNIT_CHAR: Lazy<Regex> = Lazy::new(|| {

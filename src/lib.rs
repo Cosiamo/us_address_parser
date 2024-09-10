@@ -4,6 +4,7 @@ pub mod parse;
 
 #[derive(Debug, Clone)]
 /// `Address` is the return type for [`AddressParsing::parse_addr`].
+/// Breaks-down an address into it's basic parts.
 pub struct Address {
     pub street_no: Option<String>,
     pub direction: Option<String>,
