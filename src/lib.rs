@@ -20,23 +20,30 @@ pub trait AddressParsing {
 
 impl AddressParsing for String {
     fn parse_addr(&self) -> Address {
-        let address: Address = Address { 
-            street_no: "".to_string(), 
-            direction: Direction::Abbreviated("".to_string()), 
-            street_name: "".to_string(), 
-            street_type: StreetType::Abbreviated("".to_string()), 
-            unit_no: "".to_string(), 
-            unit_type: Unit::Abbreviated("".to_string())
-        };
-
-        let full_address = self.trim().to_ascii_uppercase();
-
-        address
-            .street_no(&full_address)
-            .directional(&full_address)
-            .street_type(&full_address)
-            .unit_type_and_no(&full_address)
-            .street_name(&full_address)
+        string_to_address(self.trim().to_ascii_uppercase())
     }
 }
 
+impl AddressParsing for &str {
+    fn parse_addr(&self) -> Address {
+        string_to_address(self.trim().to_ascii_uppercase())
+    }
+}
+
+pub fn string_to_address(full_address: String) -> Address {
+    let address: Address = Address { 
+        street_no: "".to_string(), 
+        direction: Direction::Abbreviated("".to_string()), 
+        street_name: "".to_string(), 
+        street_type: StreetType::Abbreviated("".to_string()), 
+        unit_no: "".to_string(), 
+        unit_type: Unit::Abbreviated("".to_string())
+    };
+
+    address
+        .street_no(&full_address)
+        .directional(&full_address)
+        .street_type(&full_address)
+        .unit_type_and_no(&full_address)
+        .street_name(&full_address)
+}
