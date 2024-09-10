@@ -3,7 +3,7 @@ A Rust Crate that parses United States street addresses.
 
 ## How To Use
 
-To get started, simply import the [`AddressParsing`] trait to your file, and add the `parse_addr()` method to the [`String`] or [`&str`] you want to parse. It will return the [`Address`] struct, which contains; the street number, street name, street type, unit type, and unit number. Each of these fields are `Option<String>`.
+To get started, simply import the `[AddressParsing]` trait to your file, and add the `[parse_addr()]` method to the `[String]` or `[&str]` you want to parse. It will return the `[Address]` struct, which contains; the street number, street name, street type, unit type, and unit number. Each of these fields are `Option<String>`.
 
 ```rust
 use us_address_parser::AddressParsing;
@@ -60,4 +60,4 @@ impl AddressParsing for CustomerInfo {
 }
 ```
 
-The `string_to_address()` function does what it's name implies, converts a [`String`] to an [`Address`].
+The `[string_to_address()]` function does what it's name implies, converts a `[String]` to an `[Address]`.
