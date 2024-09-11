@@ -5,9 +5,10 @@ edition = "2021"
 license = "MIT"
 description = "A Rust crate that parses U.S. street addresses."
 readme = "README.md"
+homepage = "https://github.com/Cosiamo/us_address_parser"
 repository = "https://github.com/Cosiamo/us_address_parser"
 keywords = ["parser", "address", "addresses", "street", "parse"]
-categories = ["Parser implementations", "Template engine"]
+categories = ["parser-implementations", "template-engine", "data-structures"]
 exclude = ["main.rs", ".vscode/*", ".gitignore", ".idea/"]
 
 [dependencies]
