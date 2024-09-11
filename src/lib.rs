@@ -1,5 +1,5 @@
-pub mod components;
-pub mod regex;
+pub(crate) mod components;
+pub(crate) mod regex;
 pub mod parse;
 
 #[derive(Debug, Clone)]
@@ -14,6 +14,22 @@ pub struct Address {
     pub unit_type: Option<String>,
 }
 
+/// Used to add the [`AddressParsing::parse_addr`] method to your types.
+/// Example:
+/// ```rust
+///struct CustomerInfo {
+///    id: usize,
+///    customer_name: String,
+///    customer_address: String
+///}
+///
+///impl AddressParsing for CustomerInfo {
+///    fn parse_addr(&self) -> Address {
+///        let address = self.customer_address;
+///        us_address_parser::string_to_address(address)
+///    }
+///}
+///```
 pub trait AddressParsing {
     fn parse_addr(&self) -> Address;
 }
@@ -30,7 +46,7 @@ impl AddressParsing for &str {
     }
 }
 
-/// Used to convert `String` to `[us_address_parser::Address]`
+/// Used to convert `String` to [`Address`]
 pub fn string_to_address(full_address: &String) -> Address {
     let full_address = full_address.trim().to_ascii_uppercase();
     let address: Address = Address { 
