@@ -48,7 +48,12 @@ impl AddressParsing for &str {
 
 /// Used to convert `String` to [`Address`]
 pub fn string_to_address(full_address: &String) -> Address {
-    let full_address = full_address.trim().to_ascii_uppercase();
+    let full_address = full_address
+        .trim()
+        .replace(".", "")
+        .replace(",", "")
+        .replace("#", "")
+        .to_ascii_uppercase();
     let address: Address = Address { 
         street_no: None, 
         direction: None, 

@@ -348,6 +348,7 @@ pub static STREET_TYPE: Lazy<Vec<&str>> = Lazy::new(|| {
         "tunnl",
         "turnpike",
         "turnpk",
+        "turn",
         "underpass",
         "union",
         "unions",
@@ -795,6 +796,8 @@ pub static STREET_TYPE_ABBVR: Lazy<Vec<&str>> = Lazy::new(|| {
         "ldg",
         // loops 
         "loop",
+        "loo",
+        "lp",
         // mall 
         "mall",
         // manor 
@@ -863,6 +866,7 @@ pub static STREET_TYPE_ABBVR: Lazy<Vec<&str>> = Lazy::new(|| {
         "psge",
         // paths 
         "path",
+        "pat",
         // pikes 
         "pike",
         // pine 
@@ -876,7 +880,7 @@ pub static STREET_TYPE_ABBVR: Lazy<Vec<&str>> = Lazy::new(|| {
         // pkwys 
         "pkwy",
         // pky 
-        "pkwy",
+        "pkw", // "pkwy",
         // place 
         "pl",
         // plain 
