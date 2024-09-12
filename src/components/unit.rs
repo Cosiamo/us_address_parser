@@ -26,6 +26,7 @@ pub static UNIT: Lazy<Vec<&str>> = Lazy::new(||{
         "Trailer",
         "Unit",
         "Upper",
+        "PO Box"
     ]
 });
 
