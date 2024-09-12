@@ -1,17 +1,17 @@
-use crate::{regex::{regex_map, REG_STREET0, REG_STREET1, REG_STREET2, REG_STREET3, REG_STREET_ABBVR0, REG_STREET_ABBVR1, REG_STREET_ABBVR2, REG_STREET_ABBVR3}, Address};
+use crate::{regex::{regex_map_street_type, REG_STREET0, REG_STREET1, REG_STREET2, REG_STREET3, REG_STREET_ABBVR0, REG_STREET_ABBVR1, REG_STREET_ABBVR2, REG_STREET_ABBVR3}, Address};
 
 pub fn parse_street_type(mut address: Address, full_address: &str) -> Address {
     let mut captured: Vec<String> = vec![];
     
-    if let Some(val) = regex_map(&full_address, &REG_STREET_ABBVR0) { captured.push(val) };
-    if let Some(val) = regex_map(&full_address, &REG_STREET_ABBVR1) { captured.push(val) };
-    if let Some(val) = regex_map(&full_address, &REG_STREET_ABBVR2) { captured.push(val) };
-    if let Some(val) = regex_map(&full_address, &REG_STREET_ABBVR3) { captured.push(val) };
+    if let Some(val) = regex_map_street_type(&full_address, &REG_STREET_ABBVR0) { captured.push(val) };
+    if let Some(val) = regex_map_street_type(&full_address, &REG_STREET_ABBVR1) { captured.push(val) };
+    if let Some(val) = regex_map_street_type(&full_address, &REG_STREET_ABBVR2) { captured.push(val) };
+    if let Some(val) = regex_map_street_type(&full_address, &REG_STREET_ABBVR3) { captured.push(val) };
     
-    if let Some(val) = regex_map(&full_address, &REG_STREET0) { captured.push(val) };
-    if let Some(val) = regex_map(&full_address, &REG_STREET1) { captured.push(val) };
-    if let Some(val) = regex_map(&full_address, &REG_STREET2) { captured.push(val) };
-    if let Some(val) = regex_map(&full_address, &REG_STREET3) { captured.push(val) };
+    if let Some(val) = regex_map_street_type(&full_address, &REG_STREET0) { captured.push(val) };
+    if let Some(val) = regex_map_street_type(&full_address, &REG_STREET1) { captured.push(val) };
+    if let Some(val) = regex_map_street_type(&full_address, &REG_STREET2) { captured.push(val) };
+    if let Some(val) = regex_map_street_type(&full_address, &REG_STREET3) { captured.push(val) };
 
     if captured.len() == 1 {
         address.street_type = Some(captured[0].clone());
