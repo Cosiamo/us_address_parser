@@ -10,11 +10,13 @@ pub fn regex_map(haystack: &str, phrase: &Lazy<Regex>) -> Option<String> {
     } else { None }
 }
 
-pub fn regex_map_street_type(haystack: &str, phrase: &Lazy<Regex>) -> Option<String> {
-    if let Some(needle) = phrase.captures(&haystack) {
+pub fn regex_map_street_type(haystack: &str, phrase: &Lazy<Regex>) -> Option<Vec<String>> {
+    let mut res = Vec::new();
+    for needle in phrase.captures_iter(haystack) {
         let val = needle.get(needle.len() - 1).map_or("", |m|m.as_str());
-        return Some(val.trim().replace("\"", ""))
-    } else { None }
+        res.push(val.trim().replace("\"", ""));
+    }
+    return Some(res)
 }
 
 pub static REG_STREET_ABBVR0: Lazy<Regex> = Lazy::new(||{
