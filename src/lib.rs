@@ -6,6 +6,7 @@ pub mod parse;
 /// `Address` is the return type for [`AddressParsing::parse_addr`].
 /// Breaks-down an address into it's basic parts.
 pub struct Address {
+    pub full_address: String,
     pub street_no: Option<String>,
     pub direction: Option<String>,
     pub street_name: Option<String>,
@@ -55,6 +56,7 @@ pub fn string_to_address(full_address: &String) -> Address {
         .replace("#", "")
         .to_ascii_uppercase();
     let address: Address = Address { 
+        full_address,
         street_no: None, 
         direction: None, 
         street_name: None, 
@@ -64,9 +66,9 @@ pub fn string_to_address(full_address: &String) -> Address {
     };
 
     address
-        .street_no(&full_address)
-        .directional(&full_address)
-        .street_type(&full_address)
-        .unit_type_and_no(&full_address)
-        .street_name(&full_address)
+        .street_no()
+        .directional()
+        .street_type()
+        .unit_type_and_no()
+        .street_name()
 }

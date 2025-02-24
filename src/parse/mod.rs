@@ -12,23 +12,23 @@ pub(crate) mod street;
 
 impl Address {
     /// Gets the street number for an address
-    pub fn street_no(self, full_address: &str) -> Self {
-        parse_street_no(self, full_address)
+    pub fn street_no(self) -> Self {
+        parse_street_no(self)
     }
 
     /// Matches an input address to a list of 748 U.S. street types (half of them are abbreviated, other half are full types) to parse out the street type
-    pub fn street_type(self, full_address: &str) -> Self {
-        parse_street_type(self, full_address)
+    pub fn street_type(self) -> Self {
+        parse_street_type(self)
     }
 
     /// Matches an input address to a list of 48 unit types (half of them are abbreviated, other half are full types) to parse out the unit type and unit number
-    pub fn unit_type_and_no(self, full_address: &str) -> Self {
-        parse_unit_type_and_no(self, full_address)
+    pub fn unit_type_and_no(self) -> Self {
+        parse_unit_type_and_no(self)
     }
 
     /// Finds the pre or post direction in an input address
-    pub fn directional(self, full_address: &str) -> Self {
-        parse_direction(self, full_address)
+    pub fn directional(self) -> Self {
+        parse_direction(self)
     }
 
     /// Uses the [`Address::street_no()`], [`Address::street_type()`], [`Address::unit_type_and_no()`], and [`Address::directional()`] 
@@ -42,7 +42,7 @@ impl Address {
     ///    .unit_type_and_no(&full_address)
     ///    .street_name(&full_address)
     /// ```
-    pub fn street_name(self, full_address: &str) -> Self {
-        parse_street_name(self, full_address)
+    pub fn street_name(self) -> Self {
+        parse_street_name(self)
     }
 }
