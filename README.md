@@ -54,8 +54,7 @@ struct CustomerInfo {
 
 impl AddressParsing for CustomerInfo {
     fn parse_addr(&self) -> Address {
-        let address = self.customer_address;
-        us_address_parser::string_to_address(address)
+        us_address_parser::string_to_address(self.customer_address)
     }
 }
 ```

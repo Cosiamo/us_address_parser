@@ -1,19 +1,20 @@
-use crate::{regex::{regex_map_street_type, REG_STREET0, REG_STREET1, REG_STREET2, REG_STREET3, REG_STREET_ABBVR0, REG_STREET_ABBVR1, REG_STREET_ABBVR2, REG_STREET_ABBVR3}, Address};
+use crate::{components::street_type::{STREET_TYPE, STREET_TYPE_ABBVR}, Address};
 
 pub fn parse_street_type(mut address: Address) -> Address {
     let mut captured = Vec::new();
     
-    if let Some(val) = regex_map_street_type(&address.full_address, &REG_STREET_ABBVR0) { captured.push(val) };
-    if let Some(val) = regex_map_street_type(&address.full_address, &REG_STREET_ABBVR1) { captured.push(val) };
-    if let Some(val) = regex_map_street_type(&address.full_address, &REG_STREET_ABBVR2) { captured.push(val) };
-    if let Some(val) = regex_map_street_type(&address.full_address, &REG_STREET_ABBVR3) { captured.push(val) };
-    
-    if let Some(val) = regex_map_street_type(&address.full_address, &REG_STREET0) { captured.push(val) };
-    if let Some(val) = regex_map_street_type(&address.full_address, &REG_STREET1) { captured.push(val) };
-    if let Some(val) = regex_map_street_type(&address.full_address, &REG_STREET2) { captured.push(val) };
-    if let Some(val) = regex_map_street_type(&address.full_address, &REG_STREET3) { captured.push(val) };
+    let haystack = address.full_address.split(" ").collect::<Vec<&str>>();
 
-    let captured = captured.iter().flat_map(|cell|cell.to_vec()).collect::<Vec<String>>();
+    for needle in haystack {
+        if STREET_TYPE.contains(&needle.to_ascii_lowercase().as_str()) {
+            captured.push(needle.to_string());
+        } else if STREET_TYPE_ABBVR.contains(&needle.to_ascii_lowercase().as_str()) {
+            captured.push(needle.to_string());
+        } else {
+            continue;
+        }
+    }
+
     if &captured.len() == &1 {
         address.street_type = Some(captured[0].clone());
         return address
@@ -38,7 +39,7 @@ fn find_last_in_haystack(captured: &Vec<String>, full_address: &str) -> usize {
         if haystack_idx > prev_haystack_idx {
             prev_haystack_idx = haystack_idx;
             index = idx
-        }
+        } else { continue }
     }
     index
 }

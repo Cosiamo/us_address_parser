@@ -15,7 +15,7 @@ pub struct Address {
     pub unit_type: Option<String>,
 }
 
-/// Used to add the [`AddressParsing::parse_addr`] method to your types.
+/// Used to add the [parse_addr](`AddressParsing::parse_addr`) method to your types.
 /// Example:
 /// ```rust
 ///struct CustomerInfo {
@@ -26,12 +26,16 @@ pub struct Address {
 ///
 ///impl AddressParsing for CustomerInfo {
 ///    fn parse_addr(&self) -> Address {
-///        let address = self.customer_address;
-///        us_address_parser::string_to_address(address)
+///        us_address_parser::string_to_address(self.customer_address)
 ///    }
 ///}
 ///```
 pub trait AddressParsing {
+    /// Parses addresses into 6 components:
+    /// 
+    /// street number, direction, street name, street type, unit type, and unit number.
+    /// 
+    /// These structured and returned as the [Address] struct.
     fn parse_addr(&self) -> Address;
 }
 
