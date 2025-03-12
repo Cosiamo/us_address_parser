@@ -1,4 +1,7 @@
-use crate::{regex::{regex_map, REG_STREET_NUMBER}, Address};
+use crate::{
+    Address,
+    regex::{REG_STREET_NUMBER, regex_map},
+};
 
 pub fn parse_street_no(mut address: Address) -> Address {
     address.street_no = regex_map(&address.full_address, &REG_STREET_NUMBER);
@@ -22,7 +25,7 @@ pub fn parse_street_name(mut address: Address) -> Address {
         Some(val) => {
             let val = format!(" {val} ");
             street_name = street_name.replace(&val, "")
-        },
+        }
         None => street_name = street_name,
     }
     street_name = format!(" {street_name} ");
@@ -34,7 +37,7 @@ pub fn parse_street_name(mut address: Address) -> Address {
                 Some(val) => street_name = street_name.replace(&format!(" {} ", val), " "),
                 None => street_name = street_name,
             }
-        },
+        }
         None => street_name = street_name,
     }
     street_name = format!(" {street_name} ");

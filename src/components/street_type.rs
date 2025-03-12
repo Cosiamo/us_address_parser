@@ -433,7 +433,7 @@ pub static STREET_TYPE_ABBVR: Lazy<Vec<&str>> = Lazy::new(|| {
         // boulevard 
         "blvd",
         // boulv 
-        "blv", // was "blvd"
+        "blv", 
         // branch 
         "br",
         // brdge 

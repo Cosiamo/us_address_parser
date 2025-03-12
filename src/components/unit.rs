@@ -1,6 +1,6 @@
 use once_cell::sync::Lazy;
 
-pub static UNIT: Lazy<Vec<&str>> = Lazy::new(||{
+pub static UNIT: Lazy<Vec<&str>> = Lazy::new(|| {
     vec![
         "Apartment",
         "Building",
@@ -26,11 +26,11 @@ pub static UNIT: Lazy<Vec<&str>> = Lazy::new(||{
         "Trailer",
         "Unit",
         "Upper",
-        "PO Box"
+        "PO Box",
     ]
 });
 
-pub static UNIT_ABBVR: Lazy<Vec<&str>> = Lazy::new(||{
+pub static UNIT_ABBVR: Lazy<Vec<&str>> = Lazy::new(|| {
     vec![
         // Apartment
         "APT",

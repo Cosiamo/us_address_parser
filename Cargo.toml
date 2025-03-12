@@ -1,7 +1,7 @@
 [package]
 name = "us_address_parser"
-version = "0.2.2"
-edition = "2021"
+version = "0.3.0"
+edition = "2024"
 license = "MIT"
 description = "A Rust crate that parses U.S. street addresses."
 readme = "README.md"

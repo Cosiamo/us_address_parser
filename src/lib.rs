@@ -1,6 +1,6 @@
 pub(crate) mod components;
-pub(crate) mod regex;
 pub mod parse;
+pub(crate) mod regex;
 
 #[derive(Debug, Clone)]
 /// `Address` is the return type for [`AddressParsing::parse_addr`].
@@ -17,7 +17,7 @@ pub struct Address {
 
 /// Used to add the [parse_addr](`AddressParsing::parse_addr`) method to your types.
 /// Example:
-/// ```rust
+/// ```no_run
 ///struct CustomerInfo {
 ///    id: usize,
 ///    customer_name: String,
@@ -32,9 +32,9 @@ pub struct Address {
 ///```
 pub trait AddressParsing {
     /// Parses addresses into 6 components:
-    /// 
+    ///
     /// street number, direction, street name, street type, unit type, and unit number.
-    /// 
+    ///
     /// These structured and returned as the [Address] struct.
     fn parse_addr(&self) -> Address;
 }
@@ -59,14 +59,14 @@ pub fn string_to_address(full_address: &String) -> Address {
         .replace(",", "")
         .replace("#", "")
         .to_ascii_uppercase();
-    let address: Address = Address { 
+    let address: Address = Address {
         full_address,
-        street_no: None, 
-        direction: None, 
-        street_name: None, 
-        street_type: None, 
-        unit_no: None, 
-        unit_type: None
+        street_no: None,
+        direction: None,
+        street_name: None,
+        street_type: None,
+        unit_no: None,
+        unit_type: None,
     };
 
     address

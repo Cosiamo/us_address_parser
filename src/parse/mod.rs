@@ -5,10 +5,10 @@ use unit::parse_unit_type_and_no;
 
 use crate::Address;
 
-pub(crate) mod street_type;
-pub(crate) mod unit;
 pub(crate) mod direction;
 pub(crate) mod street;
+pub(crate) mod street_type;
+pub(crate) mod unit;
 
 impl Address {
     /// Gets the street number for an address
@@ -31,10 +31,10 @@ impl Address {
         parse_direction(self)
     }
 
-    /// Uses the [`Address::street_no()`], [`Address::street_type()`], [`Address::unit_type_and_no()`], and [`Address::directional()`] 
+    /// Uses the [`Address::street_no()`], [`Address::street_type()`], [`Address::unit_type_and_no()`], and [`Address::directional()`]
     /// to strip out those parts of an input address to get the street name.
     /// !!!USE LAST!!! when adding methods to [`Address`].
-    /// ```rust
+    /// ```no_run
     /// address
     ///    .street_no(&full_address)
     ///    .directional(&full_address)
